@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haritha Jayasuriya Chemistry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    
+    <!-- Navigation -->
+    <header class="glass-bg">
+        <div class="logo">Haritha Jayasuriya <span style="color:white; font-size:0.8em; font-weight:400">Chemistry</span></div>
+        <div id="user-profile" class="hidden" style="display:flex; align-items:center; gap:1rem;">
+            <span id="user-name-display" style="color: white; font-weight: 600;">Student Name</span>
+            <button onclick="logout()" class="btn btn-secondary" style="padding:0.5rem 1rem; font-size:0.8rem">Logout</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Auth Section -->
+        <section id="auth-section" class="flex-center" style="min-height: 80vh; flex-direction: column;">
+            <div class="hero-text">
+                <h1>Chemistry <span style="color: var(--primary-color)">Class</span></h1>
+                <p style="font-size: 1.5rem; color: var(--secondary-color); font-family: 'Noto Sans Sinhala', sans-serif;">හීනය ජයග්‍රහණය කරා</p>
+            </div>
+
+            <div class="glass-card" style="width: 100%; max-width: 500px;">
+                <!-- Register Form -->
+                <form id="register-form">
+                    <h2 style="margin-bottom: 1.5rem; text-align: center;">Register</h2>
+                    
+                    <div class="form-group">
+                        <label>නම (Name)</label>
+                        <input type="text" id="reg-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ලිපිනය (Address)</label>
+                        <input type="text" id="reg-address" required>
+                    </div>
+                    <div class="form-group">
+                        <label>උසස් පෙළ කරන ලද වර්ෂය (A/L Year)</label>
+                        <select id="reg-year" required>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>දුරකතන අංකය (Phone)</label>
+                        <input type="tel" id="reg-phone" pattern="[0-9]{10}" placeholder="07xxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>දිස්ත්‍රික්කය (District)</label>
+                        <input type="text" id="reg-district" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ළඟම නගරය (Nearest City)</label>
+                        <input type="text" id="reg-city" required>
+                    </div>
+                    <div class="form-group">
+                        <label>කීවෙනි පාරටද උසස් පෙළ කරන්නේ (Attempt)</label>
+                        <select id="reg-attempt" required>
+                            <option value="1">1st Shy</option>
+                            <option value="2">2nd Shy</option>
+                            <option value="3">3rd Shy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>රහස් අංකය (Password)</label>
+                        <input type="password" id="reg-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>නැවත වතාවක් රහස් අංකය (Confirm Password)</label>
+                        <input type="password" id="reg-confirm-password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Register & Login</button>
+                    <p style="margin-top: 1rem; text-align: center; cursor: pointer; color: var(--secondary-color);" onclick="showLogin()">Already handle an account? Login</p>
+                </form>
+
+                <!-- Login Form -->
+                <form id="login-form" class="hidden">
+                    <h2 style="margin-bottom: 1.5rem; text-align: center;">Login</h2>
+                    <div class="form-group">
+                        <label>දුරකථන අංකය (Phone)</label>
+                        <input type="tel" id="login-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>රහස් අංකය (Password)</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    <p style="margin-top: 1rem; text-align: center; cursor: pointer; color: var(--secondary-color);" onclick="recoverPassword()">Forgot Password?</p>
+                    <p style="margin-top: 0.5rem; text-align: center; cursor: pointer; color: var(--text-gray);" onclick="showRegister()">New Student? Register</p>
+                </form>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="hidden">
+            <h2 style="font-family: 'Noto Sans Sinhala'; margin-bottom: 1rem;">සාදරයෙන් පිළිගනිමු! (Welcome)</h2>
+            <div class="dashboard-grid">
+                <div class="glass-card dashboard-card" onclick="navigateTo('live-class')">
+                    <i class="fa-solid fa-video card-icon"></i>
+                    <div class="card-title">Live Class</div>
+                    <p>සජීවී පන්ති</p>
+                </div>
+                <div class="glass-card dashboard-card" onclick="navigateTo('videos')">
+                    <i class="fa-solid fa-circle-play card-icon"></i>
+                    <div class="card-title">Class Videos</div>
+                    <p>පන්ති වීඩියෝ</p>
+                </div>
+                <div class="glass-card dashboard-card" onclick="navigateTo('materials')">
+                    <i class="fa-solid fa-file-pdf card-icon"></i>
+                    <div class="card-title">Papers & Tutes</div>
+                    <p>පේපර් සහ ටියුට්</p>
+                </div>
+                <div class="glass-card dashboard-card" onclick="navigateTo('details')">
+                    <i class="fa-solid fa-info-circle card-icon"></i>
+                    <div class="card-title">Class Details</div>
+                    <p>පන්ති විස්තර</p>
+                </div>
+                <div class="glass-card dashboard-card" onclick="navigateTo('payments')">
+                    <i class="fa-solid fa-credit-card card-icon"></i>
+                    <div class="card-title">Payments</div>
+                    <p>පන්ති ගාස්තු</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Class Section -->
+        <section id="live-class-section" class="hidden section-content">
+            <div class="back-btn" onclick="navigateTo('dashboard')"><i class="fa-solid fa-arrow-left"></i> Back</div>
+            <h2>Live Classes</h2>
+            <div id="live-class-content">
+                <!-- Tabs for 2026, 2027, 2028 -->
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <button class="btn btn-secondary" onclick="renderLiveTable('2026')">2026</button>
+                    <button class="btn btn-secondary" onclick="renderLiveTable('2027')">2027</button>
+                    <button class="btn btn-secondary" onclick="renderLiveTable('2028')">2028</button>
+                </div>
+                <div id="live-table-container"></div>
+                <!-- Admin Upload Control dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos-section" class="hidden section-content">
+            <div class="back-btn" onclick="navigateTo('dashboard')"><i class="fa-solid fa-arrow-left"></i> Back</div>
+            <h2>Class Videos</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <!-- Topics Buttons -->
+                <button class="glass-card btn" onclick="showVideoTopic('Atomic Structure')">පරමාණුක ව්‍යුහය</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Structure & Bonding')">ව්‍යුහ හා බන්ධන</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Chemical Calc')">රසායනික ගණනය</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Gaseous State')">පදාර්ථයේ වායුමය අවස්ථාව</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Energetics')">ශක්ති විද්‍යාව</button>
+                <button class="glass-card btn" onclick="showVideoTopic('S P D Blocks')">S, P සහ d ගොනු</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Organic')">කාබනික රසායනය</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Kinetics')">චාලක රසායනය</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Equilibrium')">සමතුලිතතාව</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Electrochemistry')">විද්යුත් රසායනය</button>
+                <button class="glass-card btn" onclick="showVideoTopic('Industrial')">කර්මාන්ත රසායනය</button>
+            </div>
+            <div id="video-list-container" style="margin-top: 2rem;"></div>
+        </section>
+
+        <!-- Materials Section -->
+        <section id="materials-section" class="hidden section-content">
+            <div class="back-btn" onclick="navigateTo('dashboard')"><i class="fa-solid fa-arrow-left"></i> Back</div>
+            <h2>Papers & Tutes</h2>
+            <div style="display: flex; gap: 2rem; margin-top: 1rem;">
+                <div style="flex: 1;">
+                    <h3>Papers</h3>
+                    <div id="papers-list"></div>
+                </div>
+                <div style="flex: 1;">
+                    <h3>Tutes</h3>
+                    <div id="tutes-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Class Details Section -->
+        <section id="details-section" class="hidden section-content">
+            <div class="back-btn" onclick="navigateTo('dashboard')"><i class="fa-solid fa-arrow-left"></i> Back</div>
+            <h2>Class Details & Fees</h2>
+            <div class="glass-card" style="margin-top: 1rem;">
+                <h3>2026 Theory</h3>
+                <p>Wednesday & Friday: 7:00 PM - 10:00 PM</p>
+                <button class="btn btn-primary" style="margin-top: 0.5rem;" onclick="navigateTo('payments')">Fee: 2500 LKR</button>
+            </div>
+            <div class="glass-card" style="margin-top: 1rem;">
+                <h3>2026 Paper Discussion</h3>
+                <p>Thursday: 6:30 PM - 9:30 PM</p>
+                <button class="btn btn-primary" style="margin-top: 0.5rem;" onclick="navigateTo('payments')">Fee: 1000 LKR</button>
+            </div>
+            <div class="glass-card" style="margin-top: 1rem;">
+                <h3>2026 Theory + Paper</h3>
+                <button class="btn btn-primary" style="margin-top: 0.5rem;" onclick="navigateTo('payments')">Fee: 3000 LKR</button>
+            </div>
+            <div class="glass-card" style="margin-top: 1rem;">
+                <h3>2027 Theory</h3>
+                <p>Saturday: 6:00 PM - 10:00 PM</p>
+                <button class="btn btn-primary" style="margin-top: 0.5rem;" onclick="navigateTo('payments')">Fee: 2000 LKR</button>
+            </div>
+            <!-- More details added dynamically or statically -->
+        </section>
+
+        <!-- Payments Section -->
+        <section id="payments-section" class="hidden section-content">
+            <div class="back-btn" onclick="navigateTo('dashboard')"><i class="fa-solid fa-arrow-left"></i> Back</div>
+            <h2>Payments</h2>
+            <div class="payment-details">
+                <h3>Bank Transfer Details</h3>
+                <p><strong>Bank:</strong> Peoples Bank</p>
+                <p><strong>Name:</strong> Haritha Jayasuriya</p>
+                <p><strong>Account Number:</strong> 156200190064717</p>
+            </div>
+
+            <div class="glass-card">
+                <h3>Upload Payment Slip</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-gray);">
+                    Please upload your bank slip or screenshot of online payment. 
+                    Your access will be activated manually after verification.
+                </p>
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label>Select Month</label>
+                        <select id="pay-month">
+                            <option>January</option>
+                            <option>February</option>
+                            <option>March</option>
+                            <!-- etc -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Slip Image</label>
+                        <input type="file" id="pay-slip" accept="image/*,application/pdf" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload & Notify Sir</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-gray); margin-top: auto;">
+        &copy; 2026 Haritha Jayasuriya Chemistry. All Rights Reserved.
+    </footer>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
